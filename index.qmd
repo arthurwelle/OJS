@@ -1,0 +1,31 @@
+---
+title: "OJS_R"
+output: 
+  html_document:
+    self_contained: true
+---
+
+
+
+# Testing Observable.js with R and Quarto
+
+
+```{r, message=FALSE}
+library(dplyr)
+
+data <- cars
+
+ojs_define(observable_data = data)
+```
+
+```{ojs}
+Plot.plot({
+  marks: [
+    Plot.dot(transpose(observable_data), 
+      {x: "speed", y: "dist"}, 
+      { stroke: "black" }
+    )
+  ]}
+)
+```
+
