@@ -5,10 +5,7 @@ output:
     self_contained: true
 ---
 
-
-
 # Testing Observable.js with R and Quarto
-
 
 ```{r, message=FALSE}
 library(dplyr)
@@ -29,3 +26,26 @@ Plot.plot({
 )
 ```
 
+```{ojs}
+viewof speed = Inputs.range(
+  [4, 25], 
+  {value: 20, step: 1, label: "speed:"}
+)
+```
+
+```{ojs}
+filtered = observable_data.filter(function(original) {
+  return speed < original.speed ;
+})
+```
+
+```{ojs}
+Plot.plot({
+  marks: [
+    Plot.dot(transpose(filtered), 
+      {x: "speed", y: "dist"}, 
+      { stroke: "black" }
+    )
+  ]}
+)
+```
